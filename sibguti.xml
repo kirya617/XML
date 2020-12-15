@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="Windows-1251" ?> 
 <?xml-stylesheet type="text/xsl" href="sibguti.xsl"?>
 <Sibguti>
-  <faculty name="ИВТ">
+  <faculty name="РР’Рў">
 	<course name="2">
-		<group name="ИВ-923">
-			<FIO>Вагнер Кирилл Евгеньевич</FIO>
+		<group name="РР’-923">
+			<FIO>Р’Р°РіРЅРµСЂ РљРёСЂРёР»Р» Р•РІРіРµРЅСЊРµРІРёС‡</FIO>
 		
 		</group>
 	</course>
   </faculty> 
-  <предметы>
-	<s> ООП </s>
-	<s> ИТ </s>
-	<s> Физра </s>
-  </предметы>
+  <РїСЂРµРґРјРµС‚С‹>
+	<s> РћРћРџ </s>
+	<s> РРў </s>
+	<s> Р¤РёР·СЂР° </s>
+  </РїСЂРµРґРјРµС‚С‹>
 </Sibguti>
