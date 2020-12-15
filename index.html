@@ -15,9 +15,9 @@
 <textarea name="textar" rows=10 cols=40> </textarea>
 <script language="JavaScript" >
 function LoadDoc(){
-var xmldoc = new ActiveXObject("Microsoft.XMLDOM");
-xmldoc.async=false;
-xmldoc.load("sibguti.xml");
+let xmldoc = new window.XMLHttpRequest();  
+xmldoc.open("GET", "sibguti.xml, false);  
+xmldoc.send(""); 
 // загружаем документ в память
 let output=" Предметы: \n";
 // требуется извлечь из документа - список всех овощей
