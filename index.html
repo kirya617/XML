@@ -1,24 +1,52 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//RU">
 <HTML><HEAD>
 <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=Windows-1251">
-<TITLE>������������ ������ 3.3</TITLE>
+<TITLE>Лабораторная работа 3.3</TITLE>
 </HEAD> 
 
 <BODY BGCOLOR="white" 
  TEXT="black" LINK="blue" ALINK="red" VLINK="green">
-<h1>�������</h1><br>
-���������:
+<h1>СибГУТИ</h1><br>
+Факультет:
 <input type="text" id="facultet" style="width: 40px"></input>
-����:
+Курс:
 <input type="text" id="curs" style="width: 20px"></input>
+<br>
+<textarea name="textar" rows=10 cols=40> </textarea>
+<script language="JavaScript" >
 
+var xmldoc = new ActiveXObject("Microsoft.XMLDOM");
+xmldoc.async=false;
+xmldoc.load("sibguti.xml");
+// загружаем документ в память
+let output=" Предметы: \n";
+// требуется извлечь из документа - список всех овощей
+// т.е. продукты, заключены в тег <product> </product> элемента <vegetables></vegetables>
+let nodes=xmldoc.documentElement.childNodes;
+//получаем все дочерние узлы корневого узла
 
-<script>
-var  XMLDoc= new ActiveXObject("Microsoft.XMLDOM");
-XMLDoc.async=false ;
-XMLDoc.load("sibguti.xml"); 
-document.write(XMLDoc);
+for(let i = 0; i < nodes.length; i++){ 
+	let eL = nodes.item(i);
+	// получаем i element списка
+	if(eL.nodeName=="предметы"){
+		// находим овощи
+		let child = eL.childNodes;
+		// получаем все дочерние элементы
+		break;
+	}
+}
+
+eL = child.item(0);
+// так как дочерних елементов может быть несколько, то неоходимо обратиться к тому, который требуется
+
+while(true){
+	if (eL.nodeName == "s") output+=eL.text+" ";
+	eL = eL.nextSibling; // получаем следующий дочерний узел
+	if(!eL) break;
+}
+
+document.all.textar.value = output;
+
 </script>
 </BODY>
 </HTML>
-
