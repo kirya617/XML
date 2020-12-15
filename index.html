@@ -4,7 +4,7 @@
 <TITLE>Лабораторная работа 3.3</TITLE>
 </HEAD> 
 
-<BODY BGCOLOR="white" 
+<BODY onLoad="LoadDoc()" BGCOLOR="white" 
  TEXT="black" LINK="blue" ALINK="red" VLINK="green">
 <h1>СибГУТИ</h1><br>
 Факультет:
@@ -14,7 +14,7 @@
 <br>
 <textarea name="textar" rows=10 cols=40> </textarea>
 <script language="JavaScript" >
-
+function LoadDoc(){
 var xmldoc = new ActiveXObject("Microsoft.XMLDOM");
 xmldoc.async=false;
 xmldoc.load("sibguti.xml");
@@ -46,7 +46,7 @@ while(true){
 }
 
 document.all.textar.value = output;
-
+}
 </script>
 </BODY>
 </HTML>
