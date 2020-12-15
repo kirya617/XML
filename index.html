@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//RU">
+<HTML><HEAD>
+<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=Windows-1251">
+<TITLE>Лабораторная работа 3.3</TITLE>
+</HEAD> 
+
+<BODY BGCOLOR="white" 
+ TEXT="black" LINK="blue" ALINK="red" VLINK="green">
+<h1>СибГУТИ</h1><br>
+Факультет:
+<input type="text" id="facultet" style="width: 40px"></input>
+Курс:
+<input type="text" id="curs" style="width: 20px"></input>
+
+
+<script>
+var  XMLDoc= new ActiveXObject("Microsoft.XMLDOM");
+XMLDoc.async=false ;
+XMLDoc.load("sibguti.xml"); 
+document.write(XMLDoc);
+</script>
+</BODY>
+</HTML>
+
