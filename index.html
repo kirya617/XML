@@ -4,48 +4,111 @@
 <TITLE>Лабораторная работа 3.3</TITLE>
 </HEAD> 
 
-<BODY onLoad="LoadDoc()" BGCOLOR="white" 
- TEXT="black" LINK="blue" ALINK="red" VLINK="green">
+<BODY  BGCOLOR="#FFEFCF">
 <h1>СибГУТИ</h1><br>
 Факультет:
 <input type="text" id="facultet" style="width: 40px"></input>
 Курс:
-<input type="text" id="curs" style="width: 20px"></input>
-<br>
-<textarea name="textar" rows=10 cols=40> </textarea>
-<script language="JavaScript" >
-function LoadDoc(){
-let xmldoc = new ActiveXObject("Microsoft.XMLDOM");
-xmldoc.async=false;
-xmldoc.load("sibguti.xml");
-// загружаем документ в память
-let output=" Предметы: \n";
-// требуется извлечь из документа - список всех овощей
-// т.е. продукты, заключены в тег <product> </product> элемента <vegetables></vegetables>
-let nodes=xmldoc.documentElement.childNodes;
-//получаем все дочерние узлы корневого узла
+<input type="text" id="curs" style="width: 80px"></input>
+Группа:
+<select id="gruppa" style='width: 100px' >
 
-for(let i = 0; i < nodes.length; i++){ 
-	let eL = nodes.item(i);
-	// получаем i element списка
+<script language="JavaScript" >
+var	xmldoc = new ActiveXObject("Microsoft.XMLDOM");
+	xmldoc.async=false;
+	xmldoc.load("sibguti.xml");
+
+var nodes = xmldoc.getElementsByTagName("второй");
+
+for(var i = 0; i < nodes.length; i++){ 
+	var eL = nodes.item(i);
+	if(eL.nodeName=="второй"){
+		var child = eL.childNodes;
+		break;
+	}		
+}
+eL = child.item(0);
+while(true){
+	if (eL.nodeName == "гр") document.write("<option value='" + eL.text + "'>" + eL.text + "</option>");
+	eL = eL.nextSibling;
+	if(!eL) break;
+}
+document.write("</select> ");
+
+document.write(" ФИО: <select id='FIO' style='width: 200px' >");
+var node = xmldoc.documentElement.childNodes;
+for(var i = 0; i < node.length; i++){ 
+	var eM = node.item(i);
+	if(eM.nodeName == "ИВ-923"){
+		var child = eM.childNodes;
+		break;
+	}		
+}
+eM = child.item(0);
+while(true){
+	if (eM.nodeName == "fio") document.write("<option>" + eM.text + "</option>");
+	eM = eM.nextSibling;
+	if(!eM) break;
+}
+document.write("</select>");
+
+nodes=xmldoc.documentElement.childNodes;
+for(var i = 0; i < nodes.length; i++){ 
+	var eL = nodes.item(i);
 	if(eL.nodeName=="предметы"){
-		// находим овощи
-		let child = eL.childNodes;
-		// получаем все дочерние элементы
+		var child = eL.childNodes;
 		break;
 	}
 }
-
 eL = child.item(0);
-// так как дочерних елементов может быть несколько, то неоходимо обратиться к тому, который требуется
-
-while(true){
-	if (eL.nodeName == "s") output+=eL.text+" ";
-	eL = eL.nextSibling; // получаем следующий дочерний узел
+document.write("<br><table border='1' cellpadding='5'><tr ><th>Предмет</th><th>0</th><th>1</th><th>2</th></tr>");
+var i = 0;
+for(i = 0; ; i++){ 
+	document.write("<tr>");
+	while(true){
+		if (eL.nodeName == "s") document.write("<td>" + eL.text + "</td>");
+		eL = eL.nextSibling;
+		break;
+}
+	document.write("<form><td><input name='input_" + i + "' type='radio' value='0'></td>");
+	document.write("<td><input name='input_" + i + "' type='radio' value='1'></td>");
+	document.write("<td><input name='input_" + i + "' type='radio' value='2'></td></form>");
+	document.write("</tr>");
 	if(!eL) break;
 }
+document.write("</table>");
+document.write("<br><input id='start' type='button' value='Выполнить'> ");
+document.write("<input id='restart' type='button' value='Отменить'><br><br>");
+document.write("<textarea id='textar' rows='1' cols='55'> </textarea>");
 
-document.all.textar.value = output;
+start.onclick = function(){
+	var result = 0;
+	for(var k = 0; k <= i; k++){
+		var rad = document.getElementsByName("input_" + k);
+		for (var l = 0; l < rad.length; l++) {
+			if (rad[l].checked) {
+				result = Number(result) + Number(rad[l].value);
+			}
+		}
+	}
+	result = result / (Number(i) + 1);
+	textar.value = "Средний балл за контрольный срок составляет: " + result;
+}
+
+restart.onclick = function(){
+	document.location.reload();
+}
+
+gruppa.onchange = function(){
+	var nodes = xmldoc.getElementsByTagName("второй");
+	for(var i = 0; i < nodes.length; i++){ 
+		var eL = nodes.item(i);
+		if(eL.nodeName == "второй"){
+			curs.value = eL.nodeName;
+			facultet.value = eL.parentNode.nodeName;
+			break;
+		}		
+	}
 }
 </script>
 </BODY>
